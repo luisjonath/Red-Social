@@ -13,15 +13,6 @@ const {VITE_API_KEY,
   VITE_APP_ID} = getEnvVariables()
 
 
-// Your web app's Firebase configuration
-// const firebaseConfig = {
-//   apiKey: "AIzaSyDw_cqhXOTvxxUP2imcYCy0dWnYLGJ7Y4Y",
-//   authDomain: "social-media-3ca5b.firebaseapp.com",
-//   projectId: "social-media-3ca5b",
-//   storageBucket: "social-media-3ca5b.appspot.com",
-//   messagingSenderId: "50831840841",
-//   appId: "1:50831840841:web:f9750c728debc20fa21198",
-// };
 
 
 const firebaseConfig = {
