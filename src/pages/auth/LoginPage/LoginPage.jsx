@@ -1,34 +1,35 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import "./LoginPage.css";
-import { useForm } from "../../../hooks/useForm";
+
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { checkingAuthentication, startGoogleSignIn, startLoginWithEmailPassword } from "../../../store/auth/thunks";
+import {
+  checkingAuthentication,
+  startGoogleSignIn,
+  startLoginWithEmailPassword,
+} from "../../../store/auth/thunks";
+import { useForm } from "../../../hooks/useForm";
 
 export const LoginPage = () => {
+  // const [formData, setFormData] = useState({})
 
-  const {status, errorMessage} = useSelector( state => state.auth)
+  const { status, errorMessage } = useSelector((state) => state.auth);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const { email, password, onInputChange } = useForm({
-    email: "jonathan@gmail.com",
-    password: "123456",
-  });
+  const { email, password, onInputChange } = useForm();
 
-  const isAuthenticating = useMemo(() => status === "checking", [status])
+  const isAuthenticating = useMemo(() => status === "checking", [status]);
 
   const onSubmit = (e) => {
-    e.preventDefault()
-    console.log({email, password})
-    dispatch(startLoginWithEmailPassword({email, password}))
-
-  }
+    e.preventDefault();
+    dispatch(startLoginWithEmailPassword({ email, password }));
+  };
 
   const onGoogleSignIn = () => {
-    console.log("google")
-    dispatch(startGoogleSignIn())
-  }
+    console.log("google");
+    dispatch(startGoogleSignIn());
+  };
 
   return (
     <div className="container-loginpage">
@@ -50,17 +51,15 @@ export const LoginPage = () => {
             onChange={onInputChange}
           />
         </div>
-        <div className="error-login">
-
-          {
-            errorMessage? errorMessage: ""
-          }
-          </div>
+        {errorMessage ? errorMessage : ""}
         <div className="btn-loginpage">
-          
-          <button type="submit" disabled={isAuthenticating} >Send</button>
+          <button type="submit" disabled={isAuthenticating}>
+            Login
+          </button>
 
-          <button onClick={onGoogleSignIn} disabled={isAuthenticating}>Google</button>
+          <button onClick={onGoogleSignIn} disabled={isAuthenticating}>
+            Google
+          </button>
         </div>
         <Link to={"/auth/register"}>Create Account</Link>
       </form>
